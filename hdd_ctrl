@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+function showHelp() {
+    echo "Usage - HDD Control"
+    echo "-wm    Wake HDD and Mount"
+    echo "-us    Sync, Unmount and Sleep HDD"
+    echo "-u     Unmount HDD"
+    echo "-s     Sleep HDD"
+    echo "-ch    Configure target HDD"
+    echo "-cm    Configure Mounting point"
+    echo "-ab    About"
+}
+
+function about() {
+    echo "--- HDD Control ---"
+    echo "Made by Daniel Z. Moraes (danieldiasm)"
+    echo "Feb - 2021"
+}
+
+function validateArgQty() {
+    if [ "$#" -gt 1 ]
+    then
+        echo "!ERROR: Too many parameters provided!"
+        showHelp
+        exit 1
+    elif [ "$#" -lt 1 ]
+    then
+	echo "!ERROR: Provide a parameter!"
+	showHelp
+	exit 1
+    fi
+}
+
+validateArgQty $@
