@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+ERROR="[ERROR]"
+
+function showError() {
+    echo "$ERROR $1"
+}
+
 function showHelp() {
     echo "Usage - HDD Control"
     echo "-wm    Wake HDD and Mount"
@@ -20,15 +26,23 @@ function about() {
 function validateArgQty() {
     if [ "$#" -gt 1 ]
     then
-        echo "!ERROR: Too many parameters provided!"
+        showError ("Too many parameters provided!")
         showHelp
         exit 1
     elif [ "$#" -lt 1 ]
     then
-	echo "!ERROR: Provide a parameter!"
-	showHelp
-	exit 1
+	    showError("Missing parameters!")
+	    showHelp
+	    exit 1
+    fi
+}
+
+function evalArg() {
+    if [ $1 == "-h" ]
+    then
+        showHelp
     fi
 }
 
 validateArgQty $@
+evalArg
